@@ -1,3 +1,8 @@
-# Idle Logistics
+# EB2
 
-## The Logistics-based Idle Game I'm making with a discord bot.
+## The 2nd Version of ExzoBot
+
+It's got:
+
+- Ping Command
+- Reload Command

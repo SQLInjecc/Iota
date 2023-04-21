@@ -2,12 +2,12 @@ const {
 	ChatInputCommandInteraction,
 	SlashCommandBuilder,
 	Client,
-} = require("discord.js");
+} = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName("ping")
-		.setDescription("Answers with bot's latency"),
+		.setName('ping')
+		.setDescription('Answers with bot\'s latency'),
 	/**
 	 *
 	 * @param {ChatInputCommandInteraction} interaction
