@@ -1,8 +1,7 @@
-# EB2
+# Iota
 
-## The 2nd Version of ExzoBot
+## Small and simple
 
 It's got:
 
-- Ping Command
-- Reload Command
+- Absolutely no bugs (I need QA to confirm that)
