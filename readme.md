@@ -4,4 +4,6 @@
 
 It's got:
 
-- Absolutely no bugs (I need QA to confirm that)
+- No bugs
+- Slash commands (it's the only type!)
+- User-based database
