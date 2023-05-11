@@ -1,6 +1,6 @@
 import { EmbedBuilder } from '@discordjs/builders';
 import { ApplicationCommandOptionType, CommandInteraction } from 'discord.js';
-import { Discord, Slash, SlashGroup, SlashOption } from 'discordx';
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from 'discordx';
 import { QuickDB } from 'quick.db';
 
 @Discord()
@@ -73,14 +73,20 @@ export class jobs {
 	}
 
 	@Slash({ description: 'apply' })
-	async execute(interaction: CommandInteraction,
-			@SlashOption({
-				description: 'job to apply',
-				name: 'job',
-				required: true,
-				type: ApplicationCommandOptionType.String
-			})jta: 'tcc' | '9ee' | 'fbd' | 'dev' // job to apply
-		) {
+	async apply(
+		@SlashOption({
+			description: 'job to apply',
+			name: 'job',
+			required: true,
+			type: ApplicationCommandOptionType.String
+		})
+		@SlashChoice({ name: "Throwin' Cookies chef", value: 'tcc' })
+		@SlashChoice({ name: "98 Eats employee", value: '9ee' })
+		@SlashChoice({ name: "Foobar driver", value: 'fbd' })
+		@SlashChoice({ name: "Developer", value: 'dev' })
+		jta: String, // job to apply
+		interaction: CommandInteraction
+	) {
 		const uid = interaction.user.id;
 		const jobs = [
 			["Throwin' Cookies chef", 10, 0, 'tcc'],
@@ -93,8 +99,7 @@ export class jobs {
 		});
 		const tworked = await db.get(`${uid}.jobs.timesworked`);
 		for (let i = 0; i < jobs.length; i++) {
-			if (jobs[i][3] == jta &&
-				tworked >= jobs[i][2]) {
+			if (jobs[i][3] == jta && tworked >= jobs[i][2]) {
 				await db.set(`${uid}.jobs.cph`, jobs[i][1]);
 				interaction.reply({
 					content: `Now working as ${jobs[i][0]}`
@@ -104,6 +109,10 @@ export class jobs {
 		}
 	}
 }
+
+
+
+
 
 
 

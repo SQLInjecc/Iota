@@ -7,10 +7,10 @@ export class Daily {
 	@Slash({description: 'daily'})
 	async daily(interaction:CommandInteraction) {
 		const coins = new QuickDB({
-			filePath: "../sqlitedb/coins.sqlite"
+			filePath: '../sqlitedb/coins.sqlite'
 		});
 		const timeNeeded = new QuickDB({
-			filePath: "../sqlitedb/time.sqlite"
+			filePath: '../sqlitedb/time.sqlite'
 		});
 		const uid = interaction.user.id;
 		const timeNeededOnDB = await timeNeeded.get(`${uid}.time`);
@@ -30,4 +30,6 @@ export class Daily {
 			});
 		}
 	}
+
+
 }
