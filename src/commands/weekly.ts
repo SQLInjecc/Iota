@@ -5,12 +5,12 @@ import { QuickDB } from "quick.db";
 @Discord()
 export class Weekly {
 	@Slash({ description: 'weekly' })
-	async execute(interaction:CommandInteraction) {
+	async weekly(interaction:CommandInteraction) {
 		const coins = new QuickDB({
-			filePath: '../sqlitedb/coins.sqlite'
+			filePath: 'src/sqlitedb/coins.sqlite'
 		});
 		const timeNeeded = new QuickDB({
-			filePath: '../sqlitedb/time.sqlite'
+			filePath: 'src/sqlitedb/time.sqlite'
 		});;
 		const uid = interaction.user.id;
 		const timeNeededOnDB = await timeNeeded.get(`${uid}.timeW`);
@@ -44,6 +44,7 @@ export class Weekly {
 			});
 		}
 	}
+
 
 
 

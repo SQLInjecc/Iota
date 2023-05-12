@@ -9,7 +9,7 @@ export class Example {
     if (!gmember.user.bot) {
       const uid = gmember.id
       const coins = new QuickDB({
-        filePath: '../sqlitedb/coins.sqlite'
+        filePath: 'src/sqlitedb/coins.sqlite'
       })
       if (await coins.get(uid)) {
         console.log('Stats preserved for returning user: ', gmember.displayName)

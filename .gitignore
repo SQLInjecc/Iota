@@ -10,4 +10,4 @@ build
 node_modules
 
 # Databases
-/src/sqlitedb/*.*
+*.sqlite

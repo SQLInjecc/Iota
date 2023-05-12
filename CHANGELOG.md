@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.1-testver3] 2023-04-29
 
+### Added
+
+- Help for database setup.
+
+### Fixed
+
+- Database reading
+
+## [0.0.1-testver3] 2023-04-29
+
 ### Changed
 
 - Changelog had wrong AND missing information that is now corrected

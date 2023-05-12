@@ -10,10 +10,10 @@ export class jobs {
 	@Slash({ description: 'list' })
 	list(interaction: CommandInteraction) {
 		const jobs = [
-			["Throwin' Cookies chef", 10, 0, 'tcc'],
-			['98 Eats employee', 20, 5, '9ee'],
-			['Foobar driver', 40, 10, 'fbd'],
-			['Developer', 100, 25, 'dev']
+			["Throwin' Cookies chef", 10, 0],
+			['98 Eats employee', 20, 5],
+			['Foobar driver', 40, 10],
+			['Developer', 100, 25]
 		];
 		const embed = new EmbedBuilder().setColor(0x2b2d31).setTitle('Jobs');
 		for (let i = 0; i < jobs.length; i++) {
@@ -21,7 +21,7 @@ export class jobs {
 				name: jobs[i][0].toString(),
 				value: `\`\`\`$${jobs[i][1]}/hour\nRequirements: ${
 					jobs[i][2] == 0 ? 'None' : `Worked ${jobs[i][2]}`
-				}\nID: ${jobs[i][3]}\`\`\``
+				}\`\`\``
 			});
 		}
 		interaction.reply({
@@ -33,7 +33,7 @@ export class jobs {
 	async work(interaction: CommandInteraction) {
 		const uid = interaction.user.id;
 		const coins = new QuickDB({
-			filePath: '../sqlitedb/coins.sqlite'
+			filePath: 'src/sqlitedb/coins.sqlite'
 		});
 		const timeNeededOnDB = await coins.get(`${uid}.jobs.time`);
 		const tworked = (await coins.get(`${uid}.jobs.timesworked`)) + 1;
@@ -55,7 +55,7 @@ export class jobs {
 			interaction.reply({
 				content: `Worked 6 hours! Earned $${6 * cph}`
 			});
-			await coins.set(`${uid}.jobs.timesworked`, tworked);
+			await coins.add(`${uid}.jobs.timesworked`, 1);
 		} else {
 			const hours = Math.floor(
 				(timeNeededOnDB - new Date().getTime()) / 3600000
@@ -80,43 +80,48 @@ export class jobs {
 			required: true,
 			type: ApplicationCommandOptionType.String
 		})
-		@SlashChoice({ name: "Throwin' Cookies chef", value: 'tcc' })
-		@SlashChoice({ name: "98 Eats employee", value: '9ee' })
-		@SlashChoice({ name: "Foobar driver", value: 'fbd' })
-		@SlashChoice({ name: "Developer", value: 'dev' })
+		@SlashChoice({
+			name: "Throwin' Cookies chef",
+			value: "Throwin' Cookies chef"
+		})
+		@SlashChoice({ name: '98 Eats employee', value: '98 Eats employee' })
+		@SlashChoice({ name: 'Foobar driver', value: 'Foobar driver' })
+		@SlashChoice({ name: 'Developer', value: 'Developer' })
 		jta: String, // job to apply
 		interaction: CommandInteraction
 	) {
 		const uid = interaction.user.id;
 		const jobs = [
-			["Throwin' Cookies chef", 10, 0, 'tcc'],
-			['98 Eats employee', 20, 5, '9ee'],
-			['Foobar driver', 40, 10, 'fbd'],
-			['Developer', 100, 25, 'dev']
+			["Throwin' Cookies chef", 10, 0],
+			['98 Eats employee', 20, 5],
+			['Foobar driver', 40, 10],
+			['Developer', 100, 25]
 		];
 		const db = new QuickDB({
-			filePath: '../sqlitedb/coins.sqlite'
+			filePath: 'src/sqlitedb/coins.sqlite'
 		});
 		const tworked = await db.get(`${uid}.jobs.timesworked`);
 		for (let i = 0; i < jobs.length; i++) {
-			if (jobs[i][3] == jta && tworked >= jobs[i][2]) {
-				await db.set(`${uid}.jobs.cph`, jobs[i][1]);
+			if (jobs[i][1] == (await db.get(`${uid}.jobs.cph`))) {
 				interaction.reply({
-					content: `Now working as ${jobs[i][0]}`
+					content: "Already working as that"
 				});
 				break;
 			}
+			if (
+				tworked < jobs[i][2] &&
+				!interaction.replied
+			) {
+				interaction.reply({
+					content: "Not qualified yet"
+				});
+				break;
+			}
+			await db.set(`${uid}.jobs.cph`, jobs[i][1]);
+			interaction.reply({
+				content: `Now working as ${jobs[i][0]}`
+			});
+			break;
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
