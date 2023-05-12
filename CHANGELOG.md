@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.1-testver3] 2023-04-29
+## [1.0.0] 2023-05-12
+
+### Added
+
+- MIT License
+- Security policy
+
+### Changed
+
+- The bot is now open-source at [SQLInjecc/EB2](https://github.com/SQLInjecc/EB2)
+
+## [0.0.1-testver4] 2023-05-12
 
 ### Added
 
