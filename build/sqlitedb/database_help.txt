@@ -1,3 +1,0 @@
-Add coins.sqlite and time.sqlite to make the bot work.
-
-The databases are removed to reduce size.

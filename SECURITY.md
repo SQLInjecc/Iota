@@ -8,4 +8,4 @@
 
 ## Reporting a Vulnerability
 
-Make an issue, and I'll try to fix it ASAP.
+Make an issue tagged `broken`, and I'll try to fix it ASAP.
